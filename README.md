@@ -117,8 +117,6 @@ If you like this project, star it, and follow me on github for more projects jus
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-> Give credit to everyone who inspired your codebase.
-
 I would like to thank Microverse for providing the project description and requirements..
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
