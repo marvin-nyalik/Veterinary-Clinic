@@ -9,3 +9,5 @@ date_of_birth date,
 escape_attempts INT,
 neutered boolean,
 weight_kg decimal(4,2));
+
+ALTER TABLE animals ADD COLUMN species varchar(50);
