@@ -165,13 +165,16 @@ INNER JOIN vets ON visits.vet_id = vets.id
 LEFT JOIN specializations ON (vets.id = specializations.vet_id AND animals.species_id = specializations.species_id)
 WHERE specializations.species_id IS NULL;
 
-
-SELECT species.name AS most_visited_species, COUNT(visits.visit_date) AS visit_count
+SELECT species.name AS suggested_specialty, COUNT(visits.animal_id) AS visit_count
 FROM species
 INNER JOIN specializations ON species.id = specializations.species_id
 INNER JOIN vets ON specializations.vet_id = vets.id
-LEFT JOIN visits ON vets.id = visits.vet_id
-WHERE vets.name = 'Maisy Smith'
+INNER JOIN visits ON specializations.vet_id = visits.vet_id AND visits.animal_id IN (
+    SELECT animal_id
+    FROM visits
+    INNER JOIN vets ON visits.vet_id = vets.id
+    WHERE vets.name = 'Maisy Smith'
+)
 GROUP BY species.id, species.name
 ORDER BY visit_count DESC
 LIMIT 1;

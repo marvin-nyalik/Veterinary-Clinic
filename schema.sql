@@ -51,17 +51,3 @@ CREATE TABLE visits (
     CONSTRAINT animals_fk FOREIGN KEY (animal_id) REFERENCES animals(id) ON DELETE CASCADE,
     CONSTRAINT vets_fk FOREIGN KEY (vet_id) REFERENCES vets(id) ON DELETE CASCADE
 );
-
-SELECT species.name AS suggested_specialty, COUNT(visits.animal_id) AS visit_count
-FROM species
-INNER JOIN specializations ON species.id = specializations.species_id
-INNER JOIN vets ON specializations.vet_id = vets.id
-INNER JOIN visits ON specializations.vet_id = visits.vet_id AND visits.animal_id IN (
-    SELECT animal_id
-    FROM visits
-    INNER JOIN vets ON visits.vet_id = vets.id
-    WHERE vets.name = 'Maisy Smith'
-)
-GROUP BY species.id, species.name
-ORDER BY visit_count DESC
-LIMIT 1;
