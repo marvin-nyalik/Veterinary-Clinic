@@ -11,3 +11,23 @@ neutered boolean,
 weight_kg decimal(4,2));
 
 ALTER TABLE animals ADD COLUMN species varchar(50);
+
+CREATE TABLE owners (
+id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+full_name VARCHAR(255),
+age integer
+);
+
+CREATE TABLE species(
+id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+name VARCHAR(255)
+);
+
+ALTER TABLE animals
+DROP COLUMN species,
+ADD COLUMN species_id integer,
+ADD COLUMN owner_id integer,
+ADD CONSTRAINT fk_species FOREIGN KEY(species_id) REFERENCES species(id) ON DELETE CASCADE,
+ADD CONSTRAINT fk_owner FOREIGN KEY(owner_id) REFERENCES owners(id) ON DELETE CASCADE;
+
+
