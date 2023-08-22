@@ -178,3 +178,9 @@ INNER JOIN visits ON specializations.vet_id = visits.vet_id AND visits.animal_id
 GROUP BY species.id, species.name
 ORDER BY visit_count DESC
 LIMIT 1;
+
+EXPLAIN ANALYZE SELECT * FROM visits 
+WHERE vet_id = 2;
+
+EXPLAIN ANALYZE SELECT COUNT(*) FROM visits 
+WHERE animal_id = 4;
